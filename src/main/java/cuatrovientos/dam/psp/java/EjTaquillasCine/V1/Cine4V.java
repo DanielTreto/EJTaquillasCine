@@ -8,7 +8,7 @@ public class Cine4V {
 
 		// CONSTANTES
 		int NUM_TAQUILLAS = 2;
-		long DURACION_TOTAL = 30 * 60 * 90000;
+		long DURACION_TOTAL = 30 * 60 * 1000;
 
 		// Variables de Hilos
 		ArrayList<Thread> hilosTaquillas = new ArrayList<>();
@@ -46,7 +46,10 @@ public class Cine4V {
 					h.interrupt();
 			}
 
-			long tiempoFin = System.currentTimeMillis();
+			long tiempoFin = cola.getTiempoUltimaVenta() - tiempoInicio;
+			if (cola.getVendidas() == 0) {
+				tiempoFin = 0;
+			}
 
 			// Info simulación
 			Thread.sleep(2000);
@@ -54,7 +57,7 @@ public class Cine4V {
 			System.out.println("-------------------------------------------");
 			System.out.println("1. Clientes que vieron la película: " + cola.getVendidas());
 			System.out.println("2. Clientes sin entrada:  " + cola.getGenteEnCola());
-			System.out.println("3. Tiempo total de venta: " + (tiempoFin - tiempoInicio) + " ms");
+			System.out.println("3. Tiempo total de venta: " + tiempoFin + " ms");
 			System.out.println("-------------------------------------------");
 
 		} catch (Exception e) {

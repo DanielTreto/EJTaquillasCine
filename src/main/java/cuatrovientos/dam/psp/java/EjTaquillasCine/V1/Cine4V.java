@@ -34,7 +34,6 @@ public class Cine4V {
 			}
 
 			// Esperar el tiempo de simulación
-			System.out.println("El cine 4V está abierto");
 			long tiempoInicio = System.currentTimeMillis();
 			Thread.sleep(DURACION_TOTAL);
 

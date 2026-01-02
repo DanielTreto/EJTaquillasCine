@@ -11,7 +11,7 @@ public class ColaCine {
 	private List<Cliente> clientesEnCola;
 	private int clientesEnAtencion = 0;
 	private int contadorVendidas = 0;
-	
+
 	private long tiempoUltimaVenta = 0;
 	private long tiempoInicio;
 
@@ -68,7 +68,6 @@ public class ColaCine {
 	public int getGenteEnCola() {
 		return clientesEnCola.size() + clientesEnAtencion;
 	}
-
 
 	public long getTiempoUltimaVenta() {
 		return tiempoUltimaVenta;

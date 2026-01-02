@@ -6,7 +6,7 @@ public class Taquilla implements Runnable {
 	private static final int TIEMPO_MIN_VENTA = 20000;
 	private static final int TIEMPO_MAX_VENTA = 30000;
 	private static int asientos = 200;
-	
+
 	private String nombre;
 	private ColaCine colaCine;
 
@@ -38,9 +38,9 @@ public class Taquilla implements Runnable {
 					// Confirmamos la venta y restamos asiento si hay asientos
 					if (getAsientos() > 0) {
 						restarAsiento();
-                        colaCine.finalizarVenta(cliente);
-                        log("Venta cobrada a " + cliente.getId() +". Asientos restantes: " + getAsientos());
-                    }
+						colaCine.finalizarVenta(cliente);
+						log("Venta cobrada a " + cliente.getId() + ". Asientos restantes: " + getAsientos());
+					}
 
 				} else {
 					// Si la cola está vacía, esperamos un segundo
@@ -53,10 +53,14 @@ public class Taquilla implements Runnable {
 			log("Interrumpida");
 		}
 	}
-	
-	public static synchronized int getAsientos() { return asientos; }
-    
-    private static synchronized void restarAsiento() { asientos--; }
+
+	public static synchronized int getAsientos() {
+		return asientos;
+	}
+
+	private static synchronized void restarAsiento() {
+		asientos--;
+	}
 
 	private void log(String msg) {
 		long tiempoActual = System.currentTimeMillis() - this.timestampInicio;

@@ -19,11 +19,11 @@ public class Cine4V {
 			System.out.println("--- INICIO CINE 4V ---");
 
 			// Crear Colas
-            for(int i=1; i<=NUM_COLAS; i++) {
-                colas.add(new ColaCine("Cola"+i));
-            }
+			for (int i = 1; i <= NUM_COLAS; i++) {
+				colas.add(new ColaCine("Cola" + i));
+			}
 
-            // Crear Generador
+			// Crear Generador
 			GeneradorClientes generador = new GeneradorClientes(colas);
 			Thread hGenerador = new Thread(generador);
 			hGenerador.start();
@@ -52,27 +52,25 @@ public class Cine4V {
 
 			// Calculamos de entre todas las colas la informacion a mostrar
 			int totalVendidas = 0;
-            int totalSinEntrada = 0;
-            long ultimaVentaGlobal = tiempoInicio;
+			int totalSinEntrada = 0;
+			long ultimaVentaGlobal = tiempoInicio;
 
-            
-            for(ColaCine c : colas) {
-                totalVendidas += c.getVendidas();
-                
-                totalSinEntrada += c.getGenteEnCola(); 
-                
-                // Buscamos el tiempo de la última venta
-                if(c.getTiempoUltimaVenta() > ultimaVentaGlobal) 
-                    ultimaVentaGlobal = c.getTiempoUltimaVenta();
-            }
-			
-            long tiempoFin = ultimaVentaGlobal - tiempoInicio;
-            if(totalVendidas == 0) {
-            	tiempoFin = 0;
-            }
-            
-            
-            // Info simulación
+			for (ColaCine c : colas) {
+				totalVendidas += c.getVendidas();
+
+				totalSinEntrada += c.getGenteEnCola();
+
+				// Buscamos el tiempo de la última venta
+				if (c.getTiempoUltimaVenta() > ultimaVentaGlobal)
+					ultimaVentaGlobal = c.getTiempoUltimaVenta();
+			}
+
+			long tiempoFin = ultimaVentaGlobal - tiempoInicio;
+			if (totalVendidas == 0) {
+				tiempoFin = 0;
+			}
+
+			// Info simulación
 			Thread.sleep(2000);
 			System.out.println("\nRESULTADOS FINALES");
 			System.out.println("-------------------------------------------");

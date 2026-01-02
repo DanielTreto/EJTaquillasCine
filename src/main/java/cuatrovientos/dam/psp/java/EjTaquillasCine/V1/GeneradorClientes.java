@@ -25,7 +25,8 @@ public class GeneradorClientes implements Runnable {
 		Random rnd = new Random();
 
 		try {
-			// Esperamos 1s para que no lleguen primero los clientes antes de abrir las taquillas
+			// Esperamos 1s para que no lleguen primero los clientes antes de abrir las
+			// taquillas
 			Thread.sleep(1000);
 			// Genera clientes mientras que este activo y haya asientos libres
 			while (activo && Taquilla.getAsientos() > 0) {
@@ -39,9 +40,9 @@ public class GeneradorClientes implements Runnable {
 					Cliente c = new Cliente("Cli-" + idGlobal++);
 					colaCine.llegarACola(c);
 				}
-				
+
 				Thread.sleep(TIEMPO_LLEGADA);
-				
+
 			}
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 
 public class ColaCine {
-	
+
 	// CONSTANTES
 	private static final int CAPACIDAD = 10;
 
@@ -14,7 +14,7 @@ public class ColaCine {
 	private List<Cliente> clientesEnCola;
 	private int clientesEnAtencion = 0;
 	private int contadorVendidas = 0;
-	
+
 	private long tiempoUltimaVenta = 0;
 	private long tiempoInicio;
 
@@ -33,7 +33,7 @@ public class ColaCine {
 		semaforo.acquire();
 		if (clientesEnCola.size() < CAPACIDAD) {
 			this.clientesEnCola.add(cliente);
-			entro=true;
+			entro = true;
 			log("Entra nuevo cliente: " + cliente.getId());
 		}
 		semaforo.release();
@@ -68,7 +68,7 @@ public class ColaCine {
 
 		semaforo.release();
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}

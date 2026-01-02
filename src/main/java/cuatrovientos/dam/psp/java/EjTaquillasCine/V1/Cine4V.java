@@ -8,8 +8,7 @@ public class Cine4V {
 
 		// CONSTANTES
 		int NUM_TAQUILLAS = 2;
-		int ASIENTOS = 200;
-		long DURACION_TOTAL = 30 * 60 * 1000;
+		long DURACION_TOTAL = 30 * 60 * 90000;
 
 		// Variables de Hilos
 		ArrayList<Thread> hilosTaquillas = new ArrayList<>();
@@ -19,7 +18,7 @@ public class Cine4V {
 		try {
 			System.out.println("--- INICIO CINE 4V ---");
 
-			ColaCine cola = new ColaCine("Cola-General", ASIENTOS);
+			ColaCine cola = new ColaCine("Cola-General");
 
 			generador = new GeneradorClientes(cola);
 			hGenerador = new Thread(generador);

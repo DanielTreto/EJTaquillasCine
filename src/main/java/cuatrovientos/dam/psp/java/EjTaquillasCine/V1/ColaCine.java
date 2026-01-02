@@ -7,20 +7,18 @@ import java.util.concurrent.Semaphore;
 public class ColaCine {
 
 	private String nombre;
-	private int asientosDisponibles;
 
 	private List<Cliente> clientesEnCola;
 	private int clientesEnAtencion = 0;
 	private int contadorVendidas = 0;
+	
 	private long tiempoUltimaVenta = 0;
-
 	private long tiempoInicio;
 
 	private Semaphore semaforo = new Semaphore(1);
 
-	public ColaCine(String nombre, int asientosTotales) {
+	public ColaCine(String nombre) {
 		this.nombre = nombre;
-		this.asientosDisponibles = asientosTotales;
 		this.clientesEnCola = new ArrayList<>();
 		this.tiempoInicio = System.currentTimeMillis();
 		this.tiempoUltimaVenta = System.currentTimeMillis();
@@ -41,7 +39,7 @@ public class ColaCine {
 		semaforo.acquire();
 
 		// Recuperamos un cliente si hay asientos y hay gente
-		if (asientosDisponibles > 0 && !this.clientesEnCola.isEmpty()) {
+		if (Taquilla.getAsientos() > 0 && !this.clientesEnCola.isEmpty()) {
 			cliente = this.clientesEnCola.get(0);
 			this.clientesEnCola.remove(0);
 			this.clientesEnAtencion++;
@@ -52,19 +50,13 @@ public class ColaCine {
 		return cliente;
 	}
 
-	// Método para confirmar venta
+	// Registra la finalización exitosa de una venta y actualiza las estadísticas
 	public void finalizarVenta(Cliente cliente) throws InterruptedException {
 		semaforo.acquire();
 
 		this.clientesEnAtencion--;
-
-		// Si hay asientos disponibles vendemos una entrada
-		if (asientosDisponibles > 0) {
-			asientosDisponibles--;
-			contadorVendidas++;
-			this.tiempoUltimaVenta = System.currentTimeMillis();
-			log("Venta cobrada a: " + cliente.getId() + ". Asientos restantes: " + asientosDisponibles);
-		}
+		contadorVendidas++;
+		this.tiempoUltimaVenta = System.currentTimeMillis();
 
 		semaforo.release();
 	}
@@ -77,9 +69,6 @@ public class ColaCine {
 		return clientesEnCola.size() + clientesEnAtencion;
 	}
 
-	public int getAsientosLibres() {
-		return asientosDisponibles;
-	}
 
 	public long getTiempoUltimaVenta() {
 		return tiempoUltimaVenta;

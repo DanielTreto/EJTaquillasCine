@@ -13,7 +13,6 @@ public class ColaCine {
 	private int clientesEnAtencion = 0;
 	private int contadorVendidas = 0;
 	private long tiempoUltimaVenta = 0;
-	
 
 	private long tiempoInicio;
 
@@ -56,7 +55,7 @@ public class ColaCine {
 	// Método para confirmar venta
 	public void finalizarVenta(Cliente cliente) throws InterruptedException {
 		semaforo.acquire();
-		
+
 		this.clientesEnAtencion--;
 
 		// Si hay asientos disponibles vendemos una entrada
@@ -75,7 +74,7 @@ public class ColaCine {
 	}
 
 	public int getGenteEnCola() {
-		return clientesEnCola.size()+clientesEnAtencion;
+		return clientesEnCola.size() + clientesEnAtencion;
 	}
 
 	public int getAsientosLibres() {

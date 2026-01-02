@@ -2,11 +2,17 @@ package cuatrovientos.dam.psp.java.EjTaquillasCine.V1;
 
 public class Cliente {
     private String id;
+    private long horaLlegada;
     
-    public Cliente(String id) { this.id = id; }
+    public Cliente(String id) {
+    	this.id = id;
+    	this.horaLlegada = System.currentTimeMillis();
+    }
     
     public String getId() { return id; }
     
     @Override
-    public String toString() { return "Cliente[" + id + "]"; }
+    public String toString() {
+    	return "Cliente " + id + " (Llegó a las " + horaLlegada + ")";
+    }
 }
